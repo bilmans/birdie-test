@@ -12,7 +12,7 @@ function  App() {
   const [searchQuery, setSearchQuery] = useState(query || '');
   const [filteredEvents,setFilteredEvents]=useState([] as any)
   const [careRecipients,setCareRecipients]=useState([])
-  const eventUrl = 'http://localhost:3000/event'
+  const eventUrl = process.env.BACKEND_URL + 'event'
 
 
   function getEvents(){
