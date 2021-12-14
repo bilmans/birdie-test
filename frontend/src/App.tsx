@@ -12,10 +12,11 @@ function  App() {
   const [searchQuery, setSearchQuery] = useState(query || '');
   const [filteredEvents,setFilteredEvents]=useState([] as any)
   const [careRecipients,setCareRecipients]=useState([])
-  const eventUrl = process.env.BACKEND_URL + 'event'
+  const eventUrl = `${process.env.REACT_APP_BACKEND_URL}/event`
 
 
   function getEvents(){
+    console.log(eventUrl)
     fetch(eventUrl)
     .then(res => {
       if (!res.ok){
