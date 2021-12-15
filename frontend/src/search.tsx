@@ -1,7 +1,7 @@
 import './css/search.css'
 
 const Search= ({searchQuery, setSearchQuery}: any) => {
-    return <form action="/" method="get">
+    return <div>
         <label htmlFor="header-search">
             <span className="visually-hidden">Search Events</span>
         </label>
@@ -15,7 +15,7 @@ const Search= ({searchQuery, setSearchQuery}: any) => {
             placeholder="Filter"
             name="s" 
         />
-    </form>
+    </div>
 }
 
 export default Search;
