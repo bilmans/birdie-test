@@ -1,0 +1,21 @@
+* {
+  font-family: sans-serif;
+}
+
+.header{
+    margin-top: 25px;
+    margin-left: 25px;
+    margin-right:25px;
+}
+
+.header-container{
+    margin: 5px;
+    display: flex;
+    width:50%;
+}
+
+.header-element{
+    margin-right: 5px;  
+    font-weight: 150; 
+}
+

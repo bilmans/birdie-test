@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import './App.css';
-import './css/table.css'
+import './css/table.css';
+import './css/header.css';
 import moment from "moment";
 import Search from "./search";
 
@@ -75,6 +76,8 @@ function  App() {
     }
   }
 
+
+
   function changeTimeFormat(timestamp:string){
     const date = new Date(timestamp)
     return moment(date).format('YYYY-MM-DD HH:mm')
@@ -85,18 +88,26 @@ function  App() {
     return sentenceArray.join(' ')
   }
 
+
+
+// At the first render
   useEffect(() => {
     getEvents()
     getCareRecipients()
     console.log(filteredEvents)
 	}, []);
 
+// When searchQuery is modified
+  useEffect(() => {
+    filterEvents(events,searchQuery)
+	}, [searchQuery]);
+
 
   function eventDisplay(event: any){
     return(
       <tr key={(event.id)}>
         <th>{changeTimeFormat(event.timestamp)}</th>
-        <th>{event.event_type}</th>
+        <th>{replaceUnderscoreWithSpaces(event.event_type)}</th>
         <th>{event.visit_id}</th>
         <th>{event.care_recipient_id}</th>
         <th>{event.caregiver_id}</th>
@@ -105,6 +116,7 @@ function  App() {
     )
   }
 
+  
   function handleSelectChange(e: any){
     setSearchQuery(e.target.value)
   }
@@ -112,17 +124,24 @@ function  App() {
 
   return (
     <div>
+      <div className='header'>
+        <div className='header-container'>
+          <label className='header-element'>Choose a care recipient:</label>
+          <select className='header-element' name="careRecipient" onChange={handleSelectChange}>
+              {careRecipients.map((idObject: any) => (
+                  <option value={idObject.care_recipient_id}>{idObject.care_recipient_id}</option>
+                ))}
+          </select>
+        </div>
 
-      <label>Choose a care recipient:</label>
-      <select name="careRecipient" onChange={handleSelectChange}>
-          {careRecipients.map((idObject: any) => (
-              <option value={idObject.care_recipient_id}>{idObject.care_recipient_id}</option>
-            ))}
-      </select>
+        <div className='header-container'>
+          <label className='header-element'>Or filter manualy on any field:</label>   
+          <Search className='eheader-lement'
+          searchQuery={searchQuery}
+          setSearchQuery={setSearchQuery}/>
+        </div>
+      </div>
 
-      <Search
-      searchQuery={searchQuery}
-      setSearchQuery={setSearchQuery}/>
     <div>
         <table className="content-table">
           <thead>
