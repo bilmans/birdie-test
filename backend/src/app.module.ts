@@ -5,6 +5,8 @@ import {TypeOrmModule} from '@nestjs/typeorm'
 import { ConfigModule } from '@nestjs/config';
 import { EventModule } from './event/event.module';
 import { EventEntity } from './entities/event.entitity';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
 
 
 @Module({
@@ -19,6 +21,9 @@ import { EventEntity } from './entities/event.entitity';
       database: process.env.DATABASE_NAME,
       entities: [EventEntity],
       synchronize: false,
+    }),
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..','..','frontend','build'),
     }),
     EventModule
   ],
