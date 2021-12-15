@@ -13,7 +13,8 @@ function  App() {
   const [searchQuery, setSearchQuery] = useState(query || '');
   const [filteredEvents,setFilteredEvents]=useState([] as any)
   const [careRecipients,setCareRecipients]=useState([])
-  const eventUrl = `${process.env.REACT_APP_BACKEND_URL}/event`
+  const eventString = 'event'
+  const eventUrl = `${process.env.REACT_APP_BACKEND_URL}/${eventString}`
 
 
   function getEvents(){
@@ -21,8 +22,8 @@ function  App() {
     fetch(eventUrl)
     .then(res => {
       if (!res.ok){
-                throw Error("No access to database");
-            }
+          throw Error("No access to database");
+        }
       return res.json()})
     .then((res)=>{
       setEvents(res)
